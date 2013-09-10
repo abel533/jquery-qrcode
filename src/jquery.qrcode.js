@@ -79,9 +79,15 @@
 			// return just built canvas
 			return $table;
 		}
-  
-
+		//true if support
+		function canvasSupport() {
+			return !!document.createElement('canvas').getContext;
+		}
 		return this.each(function(){
+			//if the browser not support canvas,then table.
+			if(!canvasSupport()){
+				options.render = "table";
+			}
 			var element	= options.render == "canvas" ? createCanvas() : createTable();
 			$(element).appendTo(this);
 		});
